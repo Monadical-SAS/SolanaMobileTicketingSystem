@@ -1,5 +1,6 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {FC, useCallback, useEffect, useState} from 'react';
+import {Button, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {Section} from '../components/Section';
 import ConnectButton from '../components/ConnectButton';
@@ -9,12 +10,15 @@ import {
   Account,
 } from '../components/providers/AuthorizationProvider';
 import {useConnection} from '../components/providers/ConnectionProvider';
-import DisconnectButton from '../components/DisconnectButton';
-import RequestAirdropButton from '../components/RequestAirdropButton';
 import SignMessageButton from '../components/SignMessageButton';
 import SignTransactionButton from '../components/SignTransactionButton';
+import {RootStackParamList} from '../util/types';
 
-export default function MainScreen() {
+type MainScreenProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
+};
+
+const MainScreen: FC<MainScreenProps> = ({navigation}) => {
   const {connection} = useConnection();
   const {selectedAccount} = useAuthorization();
   const [balance, setBalance] = useState<number | null>(null);
@@ -51,6 +55,11 @@ export default function MainScreen() {
               </Section>
             </>
           ) : null}
+
+          <Button
+            title={'Go to NFTs'}
+            onPress={() => navigation.navigate('NFTs')}
+          />
         </ScrollView>
         {selectedAccount ? (
           <AccountInfo
@@ -65,7 +74,7 @@ export default function MainScreen() {
       </View>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -81,3 +90,5 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
 });
+
+export default MainScreen;
