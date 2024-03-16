@@ -1,16 +1,15 @@
 /**
  * @format
  */
-import {Buffer} from 'buffer';
-import 'react-native-get-random-values';
 
 import {AppRegistry} from 'react-native';
+
+import 'react-native-url-polyfill/auto';
+import 'react-native-get-random-values';
 import App from './App';
 import {name as appName} from './app.json';
 
-// Mock event listener functions to prevent them from fataling.
-window.addEventListener = () => {};
-window.removeEventListener = () => {};
-window.Buffer = Buffer;
+global.Buffer = require('buffer').Buffer;
+global.TextEncoder = require('text-encoding').TextEncoder;
 
 AppRegistry.registerComponent(appName, () => App);

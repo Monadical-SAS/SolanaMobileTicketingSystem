@@ -11,6 +11,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "@metaplex-foundation/mpl-candy-machine": "^6.0.0",
+    "@metaplex-foundation/mpl-token-metadata": "^3.1.0",
+    "@metaplex-foundation/umi": "^0.8.9",
+    "@metaplex-foundation/umi-bundle-defaults": "^0.8.9",
+    "@metaplex-foundation/umi-signer-wallet-adapters": "^0.9.1",
     "@react-navigation/native": "^6.1.16",
     "@react-navigation/native-stack": "^6.9.25",
     "@solana-mobile/mobile-wallet-adapter-protocol": "^2.0.0",
@@ -29,6 +34,7 @@
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
+    "@react-native/metro-config": "^0.72.11",
     "@react-native-community/eslint-config": "^3.2.0",
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^29.2.1",

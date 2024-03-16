@@ -6,8 +6,8 @@ import {Section} from '../components/Section';
 import ConnectButton from '../components/ConnectButton';
 import AccountInfo from '../components/AccountInfo';
 import {
-  useAuthorization,
   Account,
+  useAuthorization,
 } from '../components/providers/AuthorizationProvider';
 import {useConnection} from '../components/providers/ConnectionProvider';
 import SignMessageButton from '../components/SignMessageButton';
