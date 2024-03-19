@@ -1,8 +1,9 @@
 import React, {FC} from 'react';
-import {Button, Text, View} from 'react-native';
+import {Button, StyleSheet, View} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../util/types';
 import CollectionNFTs from '../components/CollectionNFTs';
+import {Header} from '../components/Header';
 
 type NFTsScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'NFTs'>;
@@ -10,12 +11,29 @@ type NFTsScreenProps = {
 
 const NFTsScreen: FC<NFTsScreenProps> = ({navigation}) => {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Details Screen</Text>
+    <View style={styles.mainContainer}>
+      <Header title="NFTs" subtitle="Collection NFTs" />
+      <View style={styles.mintButton}>
+        <Button
+          title="Mint an NFT"
+          onPress={() => navigation.navigate('Mint')}
+        />
+      </View>
       <CollectionNFTs />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  mintButton: {
+    width: '100%',
+    padding: 20,
+  },
+});
 
 export default NFTsScreen;

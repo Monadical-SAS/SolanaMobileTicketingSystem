@@ -8,7 +8,12 @@ import {
 } from 'react-native';
 import {Colors} from './Colors';
 
-export function Header() {
+type HeaderProps = {
+  title?: string;
+  subtitle?: string;
+};
+
+export function Header({title, subtitle}: HeaderProps) {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <ImageBackground
@@ -23,8 +28,8 @@ export function Header() {
       ]}
       imageStyle={styles.logo}>
       <View>
-        <Text style={styles.title}>Solana</Text>
-        <Text style={styles.subtitle}>React Native</Text>
+        <Text style={styles.title}>{title || 'Solana'}</Text>
+        <Text style={styles.subtitle}>{subtitle || 'React Native'}</Text>
       </View>
     </ImageBackground>
   );
@@ -32,24 +37,25 @@ export function Header() {
 
 const styles = StyleSheet.create({
   background: {
-    paddingBottom: 40,
-    paddingTop: 60,
-    paddingHorizontal: 32,
+    paddingBottom: 20,
+    paddingTop: 20,
+    maxHeight: 300,
+    width: '100%',
   },
   logo: {
     overflow: 'visible',
     resizeMode: 'cover',
   },
-  subtitle: {
-    color: '#333',
-    fontSize: 24,
-    fontWeight: '500',
-    textAlign: 'center',
-  },
   title: {
     color: '#fff',
     fontSize: 40,
     fontWeight: '700',
+    textAlign: 'center',
+  },
+  subtitle: {
+    color: '#333',
+    fontSize: 18,
+    fontWeight: '500',
     textAlign: 'center',
   },
 });

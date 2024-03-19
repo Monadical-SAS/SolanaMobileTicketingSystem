@@ -10,10 +10,10 @@ import {
 } from './components/providers/ConnectionProvider';
 import {AuthorizationProvider} from './components/providers/AuthorizationProvider';
 import {UmiProvider} from './components/providers/UmiProvider';
-import {Header} from './components/Header';
 import MainScreen from './screens/MainScreen';
 import NftsScreen from './screens/NftsScreen';
 import constants from './util/constants';
+import MintNFTScreen from './screens/MintNFTScreen';
 
 const Stack = createNativeStackNavigator();
 const endpoint = constants.PUBLIC_RPC || 'https://api.devnet.solana.com';
@@ -27,10 +27,10 @@ export default function App() {
         <AuthorizationProvider>
           <UmiProvider endpoint={endpoint}>
             <SafeAreaView style={styles.shell}>
-              <Header />
               <Stack.Navigator initialRouteName="Home">
                 <Stack.Screen name="Home" component={MainScreen} />
                 <Stack.Screen name="NFTs" component={NftsScreen} />
+                <Stack.Screen name="Mint" component={MintNFTScreen} />
               </Stack.Navigator>
             </SafeAreaView>
           </UmiProvider>

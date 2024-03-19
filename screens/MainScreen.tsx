@@ -1,5 +1,12 @@
 import React, {FC, useCallback, useEffect, useState} from 'react';
-import {Button, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Button,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {Section} from '../components/Section';
@@ -13,6 +20,7 @@ import {useConnection} from '../components/providers/ConnectionProvider';
 import SignMessageButton from '../components/SignMessageButton';
 import SignTransactionButton from '../components/SignTransactionButton';
 import {RootStackParamList} from '../util/types';
+import {Header} from '../components/Header';
 
 type MainScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
@@ -42,6 +50,7 @@ const MainScreen: FC<MainScreenProps> = ({navigation}) => {
 
   return (
     <>
+      <Header title={'Solana Mobile'} />
       <View style={styles.mainContainer}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           {selectedAccount ? (
@@ -53,13 +62,27 @@ const MainScreen: FC<MainScreenProps> = ({navigation}) => {
               <Section title="Sign a message">
                 <SignMessageButton />
               </Section>
-            </>
-          ) : null}
 
-          <Button
-            title={'Go to NFTs'}
-            onPress={() => navigation.navigate('NFTs')}
-          />
+              <Section title="View Collection NFTs">
+                <Button
+                  title={'Go to NFTs'}
+                  onPress={() => navigation.navigate('NFTs')}
+                />
+              </Section>
+            </>
+          ) : (
+            <>
+              <Text style={styles.title}>
+                Connect your wallet and start interacting with Solana Mobile
+              </Text>
+              <ImageBackground
+                accessibilityRole="image"
+                source={require('../img/sms.png')}
+                style={styles.logo}
+                imageStyle={styles.logo}
+              />
+            </>
+          )}
         </ScrollView>
         {selectedAccount ? (
           <AccountInfo
@@ -85,9 +108,20 @@ const styles = StyleSheet.create({
   scrollContainer: {
     height: '100%',
   },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 24,
+  },
   buttonGroup: {
     flexDirection: 'column',
     paddingVertical: 4,
+  },
+  logo: {
+    width: '100%',
+    height: '90%',
+    marginBottom: 32,
   },
 });
 

@@ -44,7 +44,7 @@ const CollectionNFTs = () => {
     <ScrollView>
       <View style={styles.container}>
         <Text style={styles.title}>
-          Collection NFTs {collectionData.data.symbol}
+          {collectionData?.data?.symbol || 'NFTs'} Collection
         </Text>
 
         {itemsData &&
@@ -82,6 +82,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: '600',
+    width: '100%',
+    textAlign: 'center',
   },
   image: {
     width: 150,
