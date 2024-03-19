@@ -14,6 +14,7 @@ import MainScreen from './screens/MainScreen';
 import NftsScreen from './screens/NftsScreen';
 import constants from './util/constants';
 import MintNFTScreen from './screens/MintNFTScreen';
+import EventsScreen from './screens/EventsScreen';
 
 const Stack = createNativeStackNavigator();
 const endpoint = constants.PUBLIC_RPC || 'https://api.devnet.solana.com';
@@ -31,6 +32,7 @@ export default function App() {
                 <Stack.Screen name="Home" component={MainScreen} />
                 <Stack.Screen name="NFTs" component={NftsScreen} />
                 <Stack.Screen name="Mint" component={MintNFTScreen} />
+                <Stack.Screen name="Events" component={EventsScreen} />
               </Stack.Navigator>
             </SafeAreaView>
           </UmiProvider>

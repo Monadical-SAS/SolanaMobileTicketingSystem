@@ -4,6 +4,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../util/types';
 import CollectionNFTs from '../components/CollectionNFTs';
 import {Header} from '../components/Header';
+import MintButton from '../components/MintButton';
 
 type NFTsScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'NFTs'>;
@@ -14,9 +15,10 @@ const NFTsScreen: FC<NFTsScreenProps> = ({navigation}) => {
     <View style={styles.mainContainer}>
       <Header title="NFTs" subtitle="Collection NFTs" />
       <View style={styles.mintButton}>
+        <MintButton />
         <Button
-          title="Mint an NFT"
-          onPress={() => navigation.navigate('Mint')}
+          title={'Events'}
+          onPress={() => navigation.navigate('Events')}
         />
       </View>
       <CollectionNFTs />
