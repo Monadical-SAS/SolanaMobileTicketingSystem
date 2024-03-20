@@ -69,6 +69,13 @@ const MainScreen: FC<MainScreenProps> = ({navigation}) => {
                   onPress={() => navigation.navigate('NFTs')}
                 />
               </Section>
+
+              <Section title="Go to QR Scanner">
+                <Button
+                  title={'Go to QR Scanner'}
+                  onPress={() => navigation.navigate('Scanner')}
+                />
+              </Section>
             </>
           ) : (
             <>

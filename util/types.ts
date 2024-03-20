@@ -3,4 +3,5 @@ export type RootStackParamList = {
   NFTs: undefined;
   Mint: undefined;
   Events: undefined;
+  Scanner: undefined;
 };
