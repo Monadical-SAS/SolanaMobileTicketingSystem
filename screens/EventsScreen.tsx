@@ -1,77 +1,29 @@
-import React, {FC, useEffect, useState} from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {FC} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../util/types';
+import CollectionNFTs from '../components/CollectionNFTs';
 import {Header} from '../components/Header';
-import {useUmi} from '../components/providers/UmiProvider';
-import {
-  fetchAllDigitalAssetByOwner,
-  fetchJsonMetadata,
-} from '@metaplex-foundation/mpl-token-metadata';
-import QRGenerator from '../components/QRGenerator';
-import AppModal from '../components/Modal';
+import MintButton from '../components/MintButton';
 import AppButton from '../components/AppButton';
 
-type NFTsScreenProps = {};
+type NFTsScreenProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Events'>;
+};
 
-const EventsScreen: FC<NFTsScreenProps> = () => {
-  const umi = useUmi();
-  const [events, setEvents] = useState<any[]>([]);
-  const [showQR, setShowQR] = useState<boolean>(false);
-
-  useEffect(() => {
-    const fetchEventsByOwner = async (): Promise<any[]> => {
-      try {
-        const assets = await fetchAllDigitalAssetByOwner(
-          umi,
-          umi.payer.publicKey,
-        );
-        return await Promise.all(
-          assets.map(async asset => {
-            const metadata = await fetchJsonMetadata(umi, asset.metadata.uri);
-            return {
-              ...asset,
-              metadata,
-            };
-          }),
-        );
-      } catch (error) {
-        console.error('fetchEventsByOwner', error);
-        throw new Error('Error fetching my events');
-      }
-    };
-
-    fetchEventsByOwner().then(data => {
-      setEvents(data);
-    });
-  }, [umi]);
-
+const EventsScreen: FC<NFTsScreenProps> = ({navigation}) => {
   return (
     <ScrollView style={styles.mainContainer}>
-      <Header title="Your Events" />
-      <View style={styles.mainContent}>
-        {events.map(event => (
-          <View key={event.edition.publicKey} style={styles.card}>
-            <Text style={styles.title}>{event.metadata.name}</Text>
-            <Image
-              source={{uri: event.metadata.image}}
-              style={styles.image}
-              alt={event.name}
-            />
+      <Header title="NFT Events" subtitle="Collection NFTs" />
+      <View style={styles.actionButtons}>
+        <MintButton />
 
-            <View style={styles.qrButton}>
-              {showQR ? (
-                <AppModal modalVisible={showQR} setModalVisible={setShowQR}>
-                  <View style={styles.qrView}>
-                    <Text style={styles.title}>{event.metadata.name}</Text>
-                    <QRGenerator value={event.mint.publicKey} />
-                  </View>
-                </AppModal>
-              ) : (
-                <AppButton text={'Show QR'} onPress={() => setShowQR(true)} />
-              )}
-            </View>
-          </View>
-        ))}
+        <AppButton
+          text={'View my tickets'}
+          onPress={() => navigation.navigate('MyTickets')}
+        />
       </View>
+      <CollectionNFTs />
     </ScrollView>
   );
 };
@@ -80,32 +32,11 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
-  mainContent: {
+  actionButtons: {
+    width: '100%',
     padding: 20,
-  },
-  card: {
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  image: {
-    width: '100%',
-    height: undefined,
-    aspectRatio: 1,
-  },
-  qrView: {
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  qrButton: {
-    marginTop: 10,
+    gap: 20,
   },
 });
 

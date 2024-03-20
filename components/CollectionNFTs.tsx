@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {publicKey} from '@metaplex-foundation/umi';
 import {fetchCandyMachine} from '@metaplex-foundation/mpl-candy-machine';
 import {useUmi} from './providers/UmiProvider';
@@ -41,25 +41,23 @@ const CollectionNFTs = () => {
   }, [candyMachineId, umi]);
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Text style={styles.title}>
-          {collectionData?.data?.symbol || 'NFTs'} Collection
-        </Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>
+        {collectionData?.data?.symbol || 'NFTs'} Collection
+      </Text>
 
-        {itemsData &&
-          itemsData.map((nft: any, index: number) => (
-            <View key={index}>
-              <Image
-                source={{uri: nft.image}}
-                style={styles.image}
-                alt={nft.name}
-              />
-              <Text style={styles.name}>{nft.name}</Text>
-            </View>
-          ))}
-      </View>
-    </ScrollView>
+      {itemsData &&
+        itemsData.map((nft: any, index: number) => (
+          <View key={index}>
+            <Image
+              source={{uri: nft.image}}
+              style={styles.image}
+              alt={nft.name}
+            />
+            <Text style={styles.name}>{nft.name}</Text>
+          </View>
+        ))}
+    </View>
   );
 };
 

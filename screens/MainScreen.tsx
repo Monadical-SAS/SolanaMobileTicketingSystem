@@ -63,17 +63,17 @@ const MainScreen: FC<MainScreenProps> = ({navigation}) => {
                 <SignMessageButton />
               </Section>
 
-              <Section title="View Collection NFTs">
+              <Section title="View Events">
                 <Button
-                  title={'Go to NFTs'}
-                  onPress={() => navigation.navigate('NFTs')}
+                  title={'Go to Events'}
+                  onPress={() => navigation.navigate('Events')}
                 />
               </Section>
 
-              <Section title="Go to QR Scanner">
+              <Section title="Ticket Scanner">
                 <Button
-                  title={'Go to QR Scanner'}
-                  onPress={() => navigation.navigate('Scanner')}
+                  title={'Go to Ticket Scanner'}
+                  onPress={() => navigation.navigate('TicketScanner')}
                 />
               </Section>
             </>

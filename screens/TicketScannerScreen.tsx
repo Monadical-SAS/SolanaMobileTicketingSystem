@@ -11,7 +11,7 @@ import {
 } from '../util/metaplex';
 import {publicKey} from '@metaplex-foundation/umi';
 
-const ScannerScreen: FC = () => {
+const TicketScannerScreen: FC = () => {
   const umi = useUmi();
   const [scanned, setScanned] = React.useState('');
   const [result, setResult] = React.useState('');
@@ -109,4 +109,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ScannerScreen;
+export default TicketScannerScreen;

@@ -1,6 +1,5 @@
 import React, {
   ActivityIndicator,
-  Button,
   Image,
   Linking,
   StyleSheet,
@@ -39,6 +38,7 @@ import {useUmi} from './providers/UmiProvider';
 import constants from '../util/constants';
 import {useConnection} from './providers/ConnectionProvider';
 import {useAuthorization} from './providers/AuthorizationProvider';
+import AppButton from './AppButton';
 
 const CANDY_MACHINE_ID = constants.PUBLIC_CANDY_MACHINE_ID;
 const TREASURY = constants.PUBLIC_TREASURY;
@@ -173,7 +173,7 @@ const MintButton: FC = () => {
       {loading ? (
         <ActivityIndicator />
       ) : (
-        <Button title={'Mint NFT'} onPress={onClick} />
+        <AppButton text={'Mint a new NFT Ticket'} onPress={onClick} />
       )}
 
       {digitalAsset && (
@@ -187,8 +187,8 @@ const MintButton: FC = () => {
             />
           )}
 
-          <Button
-            title={'Open in Solana Explorer'}
+          <AppButton
+            text={'Open in Solana Explorer'}
             onPress={openInSolanaExplorer}
           />
         </View>
@@ -200,7 +200,6 @@ const MintButton: FC = () => {
 const styles = StyleSheet.create({
   mainContainer: {
     width: '100%',
-    padding: 20,
   },
   title: {
     fontSize: 28,

@@ -11,10 +11,9 @@ import {
 import {AuthorizationProvider} from './components/providers/AuthorizationProvider';
 import {UmiProvider} from './components/providers/UmiProvider';
 import MainScreen from './screens/MainScreen';
-import NftsScreen from './screens/NftsScreen';
-import MintNFTScreen from './screens/MintNFTScreen';
 import EventsScreen from './screens/EventsScreen';
-import ScannerScreen from './screens/ScannerScreen';
+import MyTicketsScreen from './screens/MyTicketsScreen';
+import TicketScannerScreen from './screens/TicketScannerScreen';
 import constants from './util/constants';
 
 const Stack = createNativeStackNavigator();
@@ -31,10 +30,12 @@ export default function App() {
             <SafeAreaView style={styles.shell}>
               <Stack.Navigator initialRouteName="Home">
                 <Stack.Screen name="Home" component={MainScreen} />
-                <Stack.Screen name="NFTs" component={NftsScreen} />
-                <Stack.Screen name="Mint" component={MintNFTScreen} />
                 <Stack.Screen name="Events" component={EventsScreen} />
-                <Stack.Screen name="Scanner" component={ScannerScreen} />
+                <Stack.Screen name="MyTickets" component={MyTicketsScreen} />
+                <Stack.Screen
+                  name="TicketScanner"
+                  component={TicketScannerScreen}
+                />
               </Stack.Navigator>
             </SafeAreaView>
           </UmiProvider>
