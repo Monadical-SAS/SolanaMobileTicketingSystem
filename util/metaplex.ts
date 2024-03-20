@@ -41,9 +41,12 @@ export async function fetchCandyMachineData(umi: Umi): Promise<CandyMachine> {
   }
 }
 
-export async function fetchEventsByOwner(umi: Umi): Promise<any[]> {
+export async function fetchEventsByOwner(
+  umi: Umi,
+  ownerPublicKey: PublicKey,
+): Promise<any[]> {
   try {
-    return await fetchAllDigitalAssetByOwner(umi, umi.payer.publicKey);
+    return await fetchAllDigitalAssetByOwner(umi, ownerPublicKey);
   } catch (error) {
     console.error('fetchEventsByOwner', error);
     throw new Error('Error fetching my events');

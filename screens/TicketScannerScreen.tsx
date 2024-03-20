@@ -29,15 +29,19 @@ const TicketScannerScreen: FC = () => {
       return;
     }
 
+    const [userPublicKey, mint] = scanned.split(':');
+    console.log('userPublicKey', userPublicKey);
+    console.log('mint', mint);
     try {
-      publicKey(scanned);
+      publicKey(userPublicKey);
+      publicKey(mint);
     } catch (error) {
       setResult('Invalid ticket');
       setShowModal(true);
       return;
     }
 
-    fetchMetadataByMint(umi, publicKey(scanned)).then(mintData => {
+    fetchMetadataByMint(umi, publicKey(mint)).then(mintData => {
       if (!mintData) {
         setResult('Ticket metadata not found');
         return;
@@ -47,18 +51,22 @@ const TicketScannerScreen: FC = () => {
         return;
       }
 
-      fetchEventsByOwner(umi).then((ownerData: any) => {
-        const foundInWallet = ownerData.find(
-          (event: any) => event.publicKey === scanned,
-        );
-        if (!foundInWallet) {
-          setResult('Ticket not found in user wallet');
-          return;
-        }
+      fetchEventsByOwner(umi, publicKey(userPublicKey)).then(
+        (ownerData: any) => {
+          console.log('ownerData', ownerData);
+          const foundInWallet = ownerData.find(
+            (event: any) => event.publicKey === mint,
+          );
+          if (!foundInWallet) {
+            setResult('Ticket not found in user wallet');
+            return;
+          }
 
-        setResult('Ticket found in user wallet and collection');
-        setShowModal(true);
-      });
+          setResult('Ticket found in user wallet and collection');
+        },
+      );
+
+      setShowModal(true);
     });
   }, [umi, collectionMint, scanned]);
 
