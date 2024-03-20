@@ -62,7 +62,7 @@ const EventsScreen: FC<NFTsScreenProps> = () => {
                 <AppModal modalVisible={showQR} setModalVisible={setShowQR}>
                   <View style={styles.qrView}>
                     <Text style={styles.title}>{event.metadata.name}</Text>
-                    <QRGenerator value={event.edition.publicKey} />
+                    <QRGenerator value={event.mint.publicKey} />
                   </View>
                 </AppModal>
               ) : (
