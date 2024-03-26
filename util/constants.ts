@@ -1,7 +1,7 @@
 const constants = {
   PUBLIC_RPC: 'https://api.devnet.solana.com',
-  PUBLIC_CANDY_MACHINE_ID: 'sE4KDZSte4N75HDP5SVBxgzDWn8hZ2S7wJhoZCVCKAR',
-  PUBLIC_TREASURY: 'D5wcKav3rAd2nT4kgF9mxLkB9AZLsWaJ8WoUAStA3aAb',
+  PUBLIC_CANDY_MACHINE_ID: 'LbXTUSd2bpwqPUvGdqcccfnaHU2qHKLm7e2N7dLCGzh',
+  PUBLIC_TREASURY: 'GhLwJtoRbSZrzYLCL4szkhKCat5BN3FD3nXQggQaGLrd',
 };
 
 export default constants;
