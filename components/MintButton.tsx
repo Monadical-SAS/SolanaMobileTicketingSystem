@@ -53,9 +53,7 @@ const MintButton: FC = () => {
   const [jsonMetadata, setJsonMetadata] = useState<JsonMetadata | null>(null);
 
   const candyMachineId = useMemo(() => {
-    return CANDY_MACHINE_ID
-      ? publicKey(CANDY_MACHINE_ID)
-      : publicKey('11111111111111111111111111111111');
+    return publicKey(CANDY_MACHINE_ID);
   }, []);
 
   const treasury = publicKey(TREASURY);
@@ -114,7 +112,7 @@ const MintButton: FC = () => {
     [umi],
   );
 
-  const onClick = useCallback(async () => {
+  const handleMintNFT = useCallback(async () => {
     setLoading(true);
     if (!publicKey) {
       throw new Error('Wallet not connected');
@@ -159,7 +157,15 @@ const MintButton: FC = () => {
       console.error('Error creating NFT', error);
       setLoading(false);
     }
-  }, [umi, candyMachineId, treasury]);
+  }, [
+    umi,
+    candyMachineId,
+    treasury,
+    connection,
+    signTransaction,
+    verifySignature,
+    fetchNft,
+  ]);
 
   const openInSolanaExplorer = useCallback(async () => {
     if (digitalAsset) {
@@ -173,7 +179,7 @@ const MintButton: FC = () => {
       {loading ? (
         <ActivityIndicator />
       ) : (
-        <AppButton text={'Mint a new NFT Ticket'} onPress={onClick} />
+        <AppButton text={'Mint a new NFT Ticket'} onPress={handleMintNFT} />
       )}
 
       {digitalAsset && (
